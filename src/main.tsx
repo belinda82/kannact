@@ -5,6 +5,14 @@ import queryClient from './queryClient';
 import './index.css'
 import App from './App.tsx'
 
+
+// Start MSW in development mode only
+if (import.meta.env.DEV) {
+  import('./mocks/browser').then(({ worker }) => {
+    worker.start();
+  });
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
